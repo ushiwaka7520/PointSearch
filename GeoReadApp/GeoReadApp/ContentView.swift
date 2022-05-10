@@ -15,28 +15,27 @@ class ViewModel: ObservableObject{
 }
 
 struct ContentView: View {
-        @ObservedObject var vm = ViewModel()
-//    @State var btnX:String
-//    @State var btnY:String
-
+    @ObservedObject var vm = ViewModel()
+    
     var body: some View {
-            VStack{
-                Spacer()
-                Text("座標の表示")
-                    .font(.title)
-                    .padding()
-                Text("X：\(vm.btnXs), \(vm.btnXe)")
-                    .font(.title2)
-                Text("Y：\(vm.btnYs), \(vm.btnYe)")
-                    .font(.title2)
-                Spacer()
-                //縦
-                ForEach(1..<9){_ in
-                    HStack{
-                        Spacer()
-                        //横
-                        ForEach(1..<4){ num in
-                            GeometryReader{ geometry in
+        VStack{
+            Spacer()
+            Text("座標の表示")
+                .font(.title)
+                .padding()
+            Text("X：\(vm.btnXs), \(vm.btnXe)")
+                .font(.title2)
+            Text("Y：\(vm.btnYs), \(vm.btnYe)")
+                .font(.title2)
+            Spacer()
+            //縦
+            ForEach(1..<10){_ in
+                HStack(spacing:0){
+                    Spacer()
+                    //横
+                    ForEach(1..<4){ num in
+                        GeometryReader{ geometry in
+
                             Button(action: {
                                 //btnAction
                                 vm.btnXs = Int(geometry.frame(in: .global).minX)
@@ -48,6 +47,7 @@ struct ContentView: View {
                                     .padding()
                                     .border(Color.black)
                                     .background(Color.blue)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                             }//Button(View)
                         }//GeometryReader
                     }//ForEach(1-4)
